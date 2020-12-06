@@ -1,0 +1,23 @@
+{
+  "name": "weather_app",
+  "version": "1.0.0",
+  "description": "Udacity Weather App - Front End Development",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myportfolio-tech/weather_app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/myportfolio-tech/weather_app/issues"
+  },
+  "homepage": "https://github.com/myportfolio-tech/weather_app#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
