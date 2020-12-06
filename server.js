@@ -1,6 +1,12 @@
 const express = require('express');
 const app = express();
 
+const dotenv = require('dotenv');
+dotenv.config();
+
+const port = process.env.PORT; // 8626
+
+
 const entries = [{id: 1, name: 'course1'},
 {id: 2, name: 'course2'},
 {id: 3, name: 'course3'},
@@ -26,5 +32,5 @@ app.post('/entries', (req, res) => {
     res.send(entry);
 });
 
-const port = 3000;
+
 app.listen(port, () => console.log(`listening on port ${port}`));
