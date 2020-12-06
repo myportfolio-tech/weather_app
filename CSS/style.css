@@ -1,0 +1,33 @@
+body {
+    height: 100vh;
+}
+
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.collect {
+display: flex;
+flex-direction: column;
+}
+
+.collect input {
+    margin: 20px;
+}
+
+
+.main-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-display {
+    height: 300px;
+    width: 300px;
+    border: 2px solid red;
+}
