@@ -1,47 +1,66 @@
-// const key = env.API_KEY;
-// const root_url = env.API_URL; 
-
-// console.log(key)
-// console.root_url
-
 const btn = document.getElementById('btn');
-const displayBox = document.getElementById('display-box');
-
 const zip = document.getElementById('zip');
 const user = document.getElementById('user-feel');
+const icon = document.getElementById('icon'); 
+const wind = document.getElementById('wind'); 
+const lat = document.getElementById('lat'); 
+const long = document.getElementById('long'); 
+const temp = document.getElementById('temp'); 
+const mood = document.getElementById('mood'); 
+
 
 btn.addEventListener("click", function() {
-    startProcess();
+    callAPI(zip.value, user.value);
 });
 
-async function startProcess() {
-    try{
-        const text = `${zip.value} <br> ${user.value}` // \n 
-        const weather = await callAPI(zip.value);
-        displayBox.innerHTML = weather.main.temp;
-        }
-    catch {
-        console.log(err.message);
-    }
-}
+// async function startProcess() {
+//     try{
+//         const weather = await callAPI(zip.value, user.value);
+//         console.log('Return: ', weather)
+//         displayBox.innerHTML = weather;//.main.temp;
+//         }
+//     catch (err){
+//         console.log(err.message);
+//     }
+// }
 
 
-async function callAPI(zip){
-        const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=81c30a80ddd5b3a82bcf35083a43ed9c`
-        let response = await fetch(url);
-        let data = await response.json()
+// async function callAPI(zip){
+//         const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=81c30a80ddd5b3a82bcf35083a43ed9c`
+//         let response = await fetch(url);
+//         let data = await response.json()
 
+//         console.log(data);
+//         console.log(data.main.temp);
+//         return data
+// }
+
+async function callAPI(zip, user){
+
+    fetch('/weather', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            zipcode: zip
+        })
+
+    }).then(res => res.json()).then(data => {
         console.log(data);
-        console.log(data.main.temp);
-        return data
+        weatherData(data, user);
+    });
+
 }
 
-// function() {
-//     displayContainerInfo();
-// });
 
 
-
-// document.addEventListener('scroll', function() {
-//     displayContainerInfo();
-// });
+function weatherData(data, user) {
+    icon.innerHTML = `City: ${data.name}`;
+    wind.innerHTML = `Wind: ${data.wind.speed}`;
+    lat.innerHTML = `Lattitude: ${data.coord.lat}`;
+    long.innerHTML = `Longitude: ${data.coord.lon}`;
+    temp.innerHTML = `TEMP: ${data.main.temp}`;
+    mood.innerHTML = `Mood: ${user}`;
+}

@@ -1,10 +1,13 @@
 const express = require('express');
 const app = express();
+const axios = require('axios');
 
 const dotenv = require('dotenv');
 dotenv.config();
 
 const port = process.env.PORT; // 8626
+const key = process.env.API_KEY;
+const root_url = process.env.API_URL; 
 
 
 const entries = [{id: 1, name: 'course1'},
@@ -17,19 +20,25 @@ app.use(express.static('website'));
 app.use(express.json());
 app.use(express.urlencoded( {extended: true}));
 
-app.get('/entries', (req, res) => {
-    res.send(entries)
-});
+// app.get('/weather', (req, res) => {
+//     res.send(entries)
+// });
 
-app.post('/entries', (req, res) => {
+app.post('/weather', (req, res) => {
+    const url = `https://api.openweathermap.org/data/2.5/weather?zip=${req.body.zipcode},us&appid=${key}`;
+    
+    axios.get(url)
+        .then(data => {
+            // console.log(data.data);
+            res.json(data.data);})
+            // console.log('HERE');
+            // console.log(response.status);
+            // console.log(response.data);
+        .catch(error => {
+            console.log(error);
+        })
 
-    const entry = {
-        id: entries.length + 1,
-        name: req.body.name
-    };
 
-    entries.push(entry);
-    res.send(entry);
 });
 
 

@@ -26,8 +26,15 @@ flex-direction: column;
     align-items: center;
 }
 
-.main-display {
-    height: 300px;
+.display {
+    height: 360px;
     width: 300px;
-    border: 2px solid red;
+    border: 2px solid blue;
+}
+
+
+.display-box {
+    height: 50px;
+    width: 300px;
+    border: 2px solid orange;
 }
