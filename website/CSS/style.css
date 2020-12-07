@@ -1,40 +1,83 @@
-body {
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input, select, button {
+    width : 150px;
+    height: 2rem;
+    padding: 0;
+    margin: 0;
+  }
+
+body{
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(rgb(47,150,163),rgb(48,62,143));
+    font-family: sans-serif;
+    color: white;
 }
 
 
 .container {
     display: flex;
+    padding-top: 50px;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
 }
 
 .collect {
 display: flex;
 flex-direction: column;
+align-items: center;
+justify-content: center;
 }
 
 .collect input {
     margin: 20px;
 }
 
-
-.main-div {
+.icon { 
     display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100px;
+    /* width: 300px; */
+    align-content: center;
+    justify-content: center;  
 }
+
+.icon img{
+    width: 100px;
+    height: 100px;
+}
+
+.top-display {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-items: center;
+    margin: auto;
+}
+
 
 .display {
-    height: 360px;
-    width: 300px;
-    border: 2px solid blue;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-items: center;
+
 }
 
 
+.display-block {
+    display: flex;
+}
+
 .display-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 50px;
     width: 300px;
-    border: 2px solid orange;
 }

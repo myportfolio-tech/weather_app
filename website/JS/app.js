@@ -1,6 +1,6 @@
 const btn = document.getElementById('btn');
 const zip = document.getElementById('zip');
-const user = document.getElementById('user-feel');
+const mood_pick = document.getElementById('mood-pick');
 const city = document.getElementById('city'); 
 const icon = document.getElementById('icon'); 
 const wind = document.getElementById('wind'); 
@@ -12,7 +12,7 @@ const iconimage = document.getElementById('icon-image');
 
 
 btn.addEventListener("click", function() {
-    callAPI(zip.value, user.value);
+    callAPI(zip.value, mood_pick.value);
 });
 
 // async function startProcess() {
@@ -67,7 +67,7 @@ function weatherData(data, user) {
     // mood.innerHTML = `Mood: ${user}`;
 
     city.textContent = `City: ${data.name}`;
-    icon.textContent = `Icon: ${data.weather[0].icon}`;
+    iconimage.textContent = `Icon: ${data.weather[0].icon}`;
     wind.textContent = `Wind: ${data.wind.speed}`;
     lat.textContent = `Lattitude: ${data.coord.lat}`;
     long.textContent = `Longitude: ${data.coord.lon}`;

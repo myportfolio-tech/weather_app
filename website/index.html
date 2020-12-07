@@ -10,27 +10,38 @@
 <body>
     <div class="container">
         <h1 class="header">Weather App</h1>
-        <div class="main-div">
-            <div class="collect">
-                <div class="collect">
-                    <input type="text" placeholder="Enter your zip code" name="zip" id="zip">
-                    <input type="text" placeholder="How are you feeling" name="user" id="user-feel">
-                    <button label="test" id="btn">Get Data</button>
-                </div>
-            </div>
-            <div class="display">
+            <div class="top-display">
+                <div class="icon" id="icon-image"></div>
                 <div class="display">
-                    <div class="display-box" id="city"></div>
-                    <div class="display-box" id="wind"></div>
-                    <div class="display-box" id="lat"></div>
-                    <div class="display-box" id="long"></div>
-                    <div class="display-box" id="temp"></div>
-                    <div class="display-box" id="mood"></div>
-                    <div class="display-box" id="icon"></div>
-                    <div class="display-box" id="icon-image"></div>
+                    <div class="display-block">
+                        <div class="display-box" id="city">CITY</div>
+                        <div class="display-box" id="wind">WIND</div>
+                    </div>
+                    <div class="display-block">
+                        <div class="display-box" id="lat">LAT</div>
+                        <div class="display-box" id="long">LONG</div>
+                    </div>
+                    <div class="display-block">
+                        <div class="display-box" id="temp">TEMP</div>
+                        <div class="display-box" id="mood">MOOD</div>
+                    </div>
                 </div>
             </div>
-        </div>
+
+            <div class="collect">
+                <input type="text" placeholder="zip code" name="zip" id="zip">
+                <div class="dropdown">
+                    <select name="mood" id="mood-pick">
+                    <option value="" disabled selected>your mood</option>
+                    <option value="happy">happy</option>
+                    <option value="sad">sad</option>
+                    <option value="tired">tired</option>
+                    <option value="sleepy">sleepy</option>
+                    </select>
+                </div>
+                <button label="test" id="btn">Process</button>
+            </div>
+
     </div>
 
 
