@@ -10,12 +10,6 @@ const key = process.env.API_KEY;
 const root_url = process.env.API_URL; 
 
 
-const entries = [{id: 1, name: 'course1'},
-{id: 2, name: 'course2'},
-{id: 3, name: 'course3'},
-{id: 4, name: 'course4'}];
-
-
 app.use(express.static('website'));
 app.use(express.json());
 app.use(express.urlencoded( {extended: true}));
