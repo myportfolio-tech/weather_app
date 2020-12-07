@@ -1,6 +1,7 @@
 const btn = document.getElementById('btn');
 const zip = document.getElementById('zip');
 const mood_pick = document.getElementById('mood-pick');
+const date = document.getElementById('date'); 
 const city = document.getElementById('city'); 
 const icon = document.getElementById('icon'); 
 const wind = document.getElementById('wind'); 
@@ -59,22 +60,16 @@ async function callAPI(zip, user){
 
 
 function weatherData(data, user) {
-    // icon.innerHTML = `City: ${data.name}`;
-    // wind.innerHTML = `Wind: ${data.wind.speed}`;
-    // lat.innerHTML = `Lattitude: ${data.coord.lat}`;
-    // long.innerHTML = `Longitude: ${data.coord.lon}`;
-    // temp.innerHTML = `TEMP: ${data.main.temp}`;
-    // mood.innerHTML = `Mood: ${user}`;
 
-    city.textContent = `City: ${data.name}`;
-    iconimage.textContent = `Icon: ${data.weather[0].icon}`;
-    wind.textContent = `Wind: ${data.wind.speed}`;
-    lat.textContent = `Lattitude: ${data.coord.lat}`;
-    long.textContent = `Longitude: ${data.coord.lon}`;
-    temp.textContent = `TEMP: ${data.main.temp}`;
+    date.textContent = `DATE: ${data.date}`;
+    city.textContent = `City: ${data.city}`;
+    wind.textContent = `Wind: ${data.wind}`;
+    lat.textContent = `Lattitude: ${data.lat}`;
+    long.textContent = `Longitude: ${data.long}`;
+    temp.textContent = `TEMP: ${data.temp}`;
     mood.textContent = `Mood: ${user}`;
 
-    var iconurl = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
+    var iconurl = "http://openweathermap.org/img/w/" + data.icon + ".png";
     iconimage.innerHTML = `<img src="${iconurl}" alt="">`
 
 }

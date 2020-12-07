@@ -5,6 +5,8 @@ const axios = require('axios');
 const dotenv = require('dotenv');
 dotenv.config();
 
+
+
 // const port = process.env.PORT; // 8626
 // const key = process.env.API_KEY;
 // const root_url = process.env.API_URL; 
@@ -27,16 +29,32 @@ app.post('/weather', (req, res) => {
     axios.get(url)
         .then(data => {
             // console.log(data.data);
-            res.json(data.data);})
-            // console.log('HERE');
-            // console.log(response.status);
-            // console.log(response.data);
+            const dataPackage = createPackage(data.data);
+            //console.log(dataPackage);
+            res.json(dataPackage);})
         .catch(error => {
             console.log(error);
         })
 
 
 });
+
+function createPackage(data){
+    let date = new Date();
+    // console.log(date.toDateString());
+
+    const package = {
+        "date" : date.toDateString(),
+        "city" : data.name,
+        "icon" : data.weather[0].icon,
+        "wind" : data.wind.speed,
+        "temp" : data.main.temp,
+        "long" : data.coord.lon,
+        "lat" : data.coord.lat,
+    };
+
+    return package;
+}
 
 
 app.listen(port, () => console.log(`listening on port ${port}`));
