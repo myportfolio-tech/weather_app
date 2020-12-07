@@ -5,10 +5,13 @@ const axios = require('axios');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const port = process.env.PORT; // 8626
-const key = process.env.API_KEY;
-const root_url = process.env.API_URL; 
+// const port = process.env.PORT; // 8626
+// const key = process.env.API_KEY;
+// const root_url = process.env.API_URL; 
 
+
+const port = 3000;
+const key = '81c30a80ddd5b3a82bcf35083a43ed9c';
 
 app.use(express.static('website'));
 app.use(express.json());
