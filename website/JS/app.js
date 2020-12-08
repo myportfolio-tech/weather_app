@@ -11,6 +11,7 @@ const temp = document.getElementById('temp');
 const mood = document.getElementById('mood'); 
 const full = document.getElementById('full'); 
 const iconimage = document.getElementById('icon-image'); 
+const postURL = 'https://localhost:3000/weather';
 
 
 btn.addEventListener("click", clickEvent);
@@ -24,7 +25,8 @@ async function clickEvent() {
         const response = await callAPI(zip.value);
         // console.log('Return: ', response)
         const rBody = formRequestBody(response);
-        console.log(rBody);
+        //console.log(rBody);
+        postData(rBody);
         }
     catch (err){
         console.log(err.message);
@@ -48,7 +50,9 @@ function formRequestBody(response){
 async function callAPI(zip){
         const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=81c30a80ddd5b3a82bcf35083a43ed9c`
         let response = await fetch(url);
-        let resJSON = await response.json()
+        let resJSON = await response.json();
+        let postResponse = await postData(resJSON);
+        console.log('POST Respopnse:', postResponse);
 
         // console.log(data);
         // console.log(data.main.temp);
@@ -57,6 +61,21 @@ async function callAPI(zip){
 }
 
 
+async function postData(data) {
+    const response = await fetch(postURL, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      redirect: 'follow', // manual, *follow, error
+      body: JSON.stringify(data), // body data type must match "Content-Type" header
+    })
+
+    return response
+  }
+  
 
 // async function callAPI(zip, user){
 

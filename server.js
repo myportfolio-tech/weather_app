@@ -15,6 +15,9 @@ dotenv.config();
 const port = 3000;
 const key = '81c30a80ddd5b3a82bcf35083a43ed9c';
 
+projectData = {};
+projectExtras = {};
+
 app.use(express.static('website'));
 app.use(express.json());
 app.use(express.urlencoded( {extended: true}));
@@ -24,20 +27,23 @@ app.use(express.urlencoded( {extended: true}));
 // });
 
 app.post('/weather', (req, res) => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?zip=${req.body.zipcode},us&appid=${key}`;
-    
-    axios.get(url)
-        .then(data => {
-            // console.log(data.data);
-            const dataPackage = createPackage(data.data);
-            //console.log(dataPackage);
-            res.json(dataPackage);})
-        .catch(error => {
-            console.log(error);
-        })
 
+projectData.temp = req.body.temp,
+projectData.lat = req.body.lat,
+projectData.lon = req.body.lon,
+projectData.user = req.body.user
 
+console.log('POST', projectData);
+res.send(projectData);
 });
+
+
+app.get('/data', (req, res) => {
+    console.log(projectData);
+    res.send(projectData);
+});
+
+
 
 function createPackage(data){
     let date = new Date();
