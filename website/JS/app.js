@@ -11,7 +11,8 @@ const temp = document.getElementById('temp');
 const mood = document.getElementById('mood'); 
 const full = document.getElementById('full'); 
 const iconimage = document.getElementById('icon-image'); 
-const postURL = 'https://localhost:3000/weather';
+const postURL = 'http://localhost:3000/weather';
+const getURL = 'http://localhost:3000/data';
 
 
 btn.addEventListener("click", clickEvent);
@@ -25,8 +26,13 @@ async function clickEvent() {
         const response = await callAPI(zip.value);
         // console.log('Return: ', response)
         const rBody = formRequestBody(response);
-        //console.log(rBody);
-        postData(rBody);
+        console.log('RBODY:', rBody);
+        const postRespose = await postData(rBody);
+        console.log('POST RESPOSE', postRespose);
+        const newData = await getData();
+        console.log('NEW DATA: ',newData);
+        weatherData(newData);
+
         }
     catch (err){
         console.log(err.message);
@@ -42,7 +48,7 @@ function formRequestBody(response){
         user: mood_pick.value
     };
 
-    console.log(data);
+    // console.log(data);
 
     return data
 }
@@ -51,9 +57,9 @@ async function callAPI(zip){
         const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=81c30a80ddd5b3a82bcf35083a43ed9c`
         let response = await fetch(url);
         let resJSON = await response.json();
-        let postResponse = await postData(resJSON);
-        console.log('POST Respopnse:', postResponse);
-
+        // let postResponse = await postData(resJSON);
+        // console.log('POST Respopnse:', postResponse);
+        //console.log(resJSON);
         // console.log(data);
         // console.log(data.main.temp);
         return resJSON;
@@ -77,38 +83,27 @@ async function postData(data) {
   }
   
 
-// async function callAPI(zip, user){
+async function getData()
+  {
+    let response = await fetch(getURL);
+    let resJSON = await response.json();
+    console.log("GET Result", resJSON);
 
-//     fetch('/weather', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Accept': 'application/json'
-//         },
-//         body: JSON.stringify({
-//             zipcode: zip
-//         })
-
-//     }).then(res => res.json()).then(data => {
-//         console.log(data);
-//         weatherData(data, user);
-//     });
-
-// }
+    return resJSON;
+  } 
 
 
+function weatherData(data) {
 
-// function weatherData(data, user) {
+    date.textContent = `DATE: ${data.date}`;
+    city.textContent = `City: ${data.city}`;
+    wind.textContent = `Wind: ${data.wind}`;
+    lat.textContent = `Lattitude: ${data.lat}`;
+    long.textContent = `Longitude: ${data.lon}`;
+    temp.textContent = `TEMP: ${data.temp}`;
+    mood.textContent = `Mood: ${data.user}`;
 
-//     date.textContent = `DATE: ${data.date}`;
-//     city.textContent = `City: ${data.city}`;
-//     wind.textContent = `Wind: ${data.wind}`;
-//     lat.textContent = `Lattitude: ${data.lat}`;
-//     long.textContent = `Longitude: ${data.long}`;
-//     temp.textContent = `TEMP: ${data.temp}`;
-//     mood.textContent = `Mood: ${user}`;
+    var iconurl = "http://openweathermap.org/img/w/" + data.icon + ".png";
+    iconimage.innerHTML = `<img src="${iconurl}" alt="">`
 
-//     var iconurl = "http://openweathermap.org/img/w/" + data.icon + ".png";
-//     iconimage.innerHTML = `<img src="${iconurl}" alt="">`
-
-// }
+}

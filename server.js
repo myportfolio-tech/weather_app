@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const axios = require('axios');
+const cors = require('cors');
+
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -21,6 +23,7 @@ projectExtras = {};
 app.use(express.static('website'));
 app.use(express.json());
 app.use(express.urlencoded( {extended: true}));
+app.use(cors());
 
 // app.get('/weather', (req, res) => {
 //     res.send(entries)
@@ -28,6 +31,7 @@ app.use(express.urlencoded( {extended: true}));
 
 app.post('/weather', (req, res) => {
 
+    console.log('Received request');
 projectData.temp = req.body.temp,
 projectData.lat = req.body.lat,
 projectData.lon = req.body.lon,
