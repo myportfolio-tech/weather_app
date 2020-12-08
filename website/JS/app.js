@@ -46,6 +46,7 @@ function formRequestBody(response){
         lat: response.coord.lat,
         lon: response.coord.lon,
         user: mood_pick.value
+        
     };
 
     // console.log(data);
@@ -54,7 +55,7 @@ function formRequestBody(response){
 }
 
 async function callAPI(zip){
-        const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=81c30a80ddd5b3a82bcf35083a43ed9c`
+        const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&units=imperial&appid=81c30a80ddd5b3a82bcf35083a43ed9c`
         let response = await fetch(url);
         let resJSON = await response.json();
         // let postResponse = await postData(resJSON);
@@ -95,13 +96,13 @@ async function getData()
 
 function weatherData(data) {
 
-    date.textContent = `DATE: ${data.date}`;
-    city.textContent = `City: ${data.city}`;
-    wind.textContent = `Wind: ${data.wind}`;
-    lat.textContent = `Lattitude: ${data.lat}`;
-    long.textContent = `Longitude: ${data.lon}`;
-    temp.textContent = `TEMP: ${data.temp}`;
-    mood.textContent = `Mood: ${data.user}`;
+    date.innerHTML = data.date;
+    city.innerHTML = data.city;
+    wind.innerHTML = data.wind;
+    lat.innerHTML = data.lat;
+    long.innerHTML = data.lon;
+    temp.innerHTML = data.temp;
+    mood.innerHTML = data.user;
 
     var iconurl = "http://openweathermap.org/img/w/" + data.icon + ".png";
     iconimage.innerHTML = `<img src="${iconurl}" alt="">`
