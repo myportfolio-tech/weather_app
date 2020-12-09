@@ -5,8 +5,8 @@ const date = document.getElementById('date');
 const city = document.getElementById('city'); 
 const icon = document.getElementById('icon'); 
 const wind = document.getElementById('wind'); 
-const lat = document.getElementById('lat'); 
-const long = document.getElementById('long'); 
+const coord = document.getElementById('coord'); 
+const lon = document.getElementById('long'); 
 const temp = document.getElementById('temp'); 
 const mood = document.getElementById('mood'); 
 const full = document.getElementById('full'); 
@@ -24,7 +24,7 @@ btn.addEventListener("click", clickEvent);
 async function clickEvent() {
     try{
         const response = await callAPI(zip.value);
-        // console.log('Return: ', response)
+        console.log('Return: ', response)
         const rBody = formRequestBody(response);
         console.log('RBODY:', rBody);
         const postRespose = await postData(rBody);
@@ -45,11 +45,15 @@ function formRequestBody(response){
         temp: response.main.temp,
         lat: response.coord.lat,
         lon: response.coord.lon,
-        user: mood_pick.value
-        
+        user: mood_pick.value,
+        city: response.name,
+        wind: response.wind.speed,
+        icon: response.weather[0].icon,
+        general: response.weather[0].main
+
     };
 
-    // console.log(data);
+    console.log('DATA:', data);
 
     return data
 }
@@ -96,15 +100,18 @@ async function getData()
 
 function weatherData(data) {
 
+  console.log('FINAL DATA: ',data)
+
     date.innerHTML = data.date;
     city.innerHTML = data.city;
-    wind.innerHTML = data.wind;
-    lat.innerHTML = data.lat;
-    long.innerHTML = data.lon;
-    temp.innerHTML = data.temp;
+    wind.innerHTML = `${data.wind} m/h`;
+    temp.innerHTML = `${data.temp} &#176; F`;
     mood.innerHTML = data.user;
+    coord.innerHTML = `${data.lat} lat. / ${data.lon} long.`;
+    
 
-    var iconurl = "http://openweathermap.org/img/w/" + data.icon + ".png";
-    iconimage.innerHTML = `<img src="${iconurl}" alt="">`
+    var iconURL = "http://openweathermap.org/img/w/" + data.icon + ".png";
+    console.log(iconURL)
+    iconimage.innerHTML = `<img src="${iconURL}" alt="">`
 
 }

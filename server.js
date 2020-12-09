@@ -31,11 +31,18 @@ app.use(cors());
 
 app.post('/weather', (req, res) => {
 
-    console.log('Received request');
+let date = new Date();
+
+console.log('Received request');
 projectData.temp = req.body.temp,
 projectData.lat = req.body.lat,
 projectData.lon = req.body.lon,
 projectData.user = req.body.user
+projectData.date = date.toDateString(),
+projectData.city = req.body.city,
+projectData.icon = req.body.icon,
+projectData.wind = req.body.wind,
+projectData.general = req.body.general
 
 console.log('POST', projectData);
 res.send(projectData);
