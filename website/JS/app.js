@@ -24,13 +24,9 @@ btn.addEventListener("click", clickEvent);
 async function clickEvent() {
     try{
         const response = await callAPI(zip.value);
-        console.log('Return: ', response)
         const rBody = formRequestBody(response);
-        console.log('RBODY:', rBody);
         const postRespose = await postData(rBody);
-        console.log('POST RESPOSE', postRespose);
         const newData = await getData();
-        console.log('NEW DATA: ',newData);
         weatherData(newData);
 
         }
@@ -62,11 +58,6 @@ async function callAPI(zip){
         const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&units=imperial&appid=81c30a80ddd5b3a82bcf35083a43ed9c`
         let response = await fetch(url);
         let resJSON = await response.json();
-        // let postResponse = await postData(resJSON);
-        // console.log('POST Respopnse:', postResponse);
-        //console.log(resJSON);
-        // console.log(data);
-        // console.log(data.main.temp);
         return resJSON;
         
 }
@@ -92,7 +83,6 @@ async function getData()
   {
     let response = await fetch(getURL);
     let resJSON = await response.json();
-    console.log("GET Result", resJSON);
 
     return resJSON;
   } 
@@ -111,7 +101,6 @@ function weatherData(data) {
     
 
     var iconURL = "http://openweathermap.org/img/w/" + data.icon + ".png";
-    console.log(iconURL)
     iconimage.innerHTML = `<img src="${iconURL}" alt="">`
 
 }

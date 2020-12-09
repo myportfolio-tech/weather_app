@@ -8,12 +8,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 
-
-// const port = process.env.PORT; // 8626
-// const key = process.env.API_KEY;
-// const root_url = process.env.API_URL; 
-
-
 const port = 3000;
 const key = '81c30a80ddd5b3a82bcf35083a43ed9c';
 
@@ -33,7 +27,6 @@ app.post('/weather', (req, res) => {
 
 let date = new Date();
 
-console.log('Received request');
 projectData.temp = req.body.temp,
 projectData.lat = req.body.lat,
 projectData.lon = req.body.lon,
@@ -44,34 +37,14 @@ projectData.icon = req.body.icon,
 projectData.wind = req.body.wind,
 projectData.general = req.body.general
 
-console.log('POST', projectData);
 res.send(projectData);
 });
 
 
 app.get('/data', (req, res) => {
-    console.log(projectData);
     res.send(projectData);
 });
 
-
-
-function createPackage(data){
-    let date = new Date();
-    // console.log(date.toDateString());
-
-    const package = {
-        "date" : date.toDateString(),
-        "city" : data.name,
-        "icon" : data.weather[0].icon,
-        "wind" : data.wind.speed,
-        "temp" : data.main.temp,
-        "long" : data.coord.lon,
-        "lat" : data.coord.lat,
-    };
-
-    return package;
-}
 
 
 app.listen(port, () => console.log(`listening on port ${port}`));
